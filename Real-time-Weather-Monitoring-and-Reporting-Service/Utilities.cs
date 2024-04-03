@@ -10,7 +10,7 @@ internal class Utilities
     private static int _inputLine;
     private const string InvalidOption = "Invalid Option !!! Try again.";
 
-    public static void Menu()
+    public static WeatherData Menu()
     {
         var dataProcessor = InputHandling.HandleUserInput<Exception, IDataProcessor>(() =>
         {
@@ -35,6 +35,8 @@ internal class Utilities
      Console.WriteLine($"Location: {data?.Location}");
      Console.WriteLine($"Temperature: {data?.Temperature}");
      Console.WriteLine($"Humidity: {data?.Humidity}");
+
+     return data;
     }
 
     private static IDataProcessor Options(int option)

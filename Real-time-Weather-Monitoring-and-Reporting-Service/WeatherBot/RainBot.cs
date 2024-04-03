@@ -11,7 +11,10 @@ public class RainBot(double humidityThreshold, string message) : IWeatherBot
     {
         if ((publisher as WeatherPublisher.WeatherPublisher)!.HumidityThreshold > _humidityThreshold)
         {
-            Console.WriteLine(message);
+            Console.WriteLine($"""
+                              Rain Bot Activated!!
+                              {message}
+                              """);
         }
     }
 }

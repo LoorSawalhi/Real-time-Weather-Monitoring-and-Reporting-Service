@@ -8,9 +8,12 @@ public class SnowBot(double temperatureThreshold, string message) : IWeatherBot
 
     public void Update(IWeatherPublisher publisher)
     {
-        if ((publisher as WeatherPublisher.WeatherPublisher)!.TemperatureThreshold > temperatureThreshold)
+        if ((publisher as WeatherPublisher.WeatherPublisher)!.TemperatureThreshold < temperatureThreshold)
         {
-            Console.WriteLine(message);
+            Console.WriteLine($"""
+                               Snow Bot Activated!!
+                               {message}
+                               """);
         }
     }
 }

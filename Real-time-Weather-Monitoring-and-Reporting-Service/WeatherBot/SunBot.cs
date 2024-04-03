@@ -10,7 +10,10 @@ public class SunBot(double temperatureThreshold, string message) : IWeatherBot
     {
         if ((publisher as WeatherPublisher.WeatherPublisher)!.TemperatureThreshold > temperatureThreshold)
         {
-            Console.WriteLine(message);
+            Console.WriteLine($"""
+                               Sun Bot Activated!!
+                               {message}
+                               """);
         }
     }
 }

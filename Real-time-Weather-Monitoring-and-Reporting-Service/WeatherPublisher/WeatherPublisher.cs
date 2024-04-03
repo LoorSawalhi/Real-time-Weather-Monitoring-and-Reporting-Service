@@ -29,4 +29,16 @@ public class WeatherPublisher : IWeatherPublisher
             weatherBot.Update(this);
         }
     }
+
+    public void InteractWithUsers()
+    {
+        var data = Utilities.Menu();
+
+        HumidityThreshold = data.Humidity;
+        TemperatureThreshold = data.Temperature;
+
+        Thread.Sleep(15);
+
+        Notify();
+    }
 }
