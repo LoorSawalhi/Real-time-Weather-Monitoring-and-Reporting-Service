@@ -5,7 +5,7 @@ namespace Real_time_Weather_Monitoring_and_Reporting_Service.DataProcessor;
 
 public class XmlDataProcessor : IDataProcessor
 {
-    public WeatherData ReadFile(string content)
+    public WeatherData ReadData(string content)
     {
         var serializer = new XmlSerializer(typeof(WeatherData));
         using var reader = new StringReader(content);
