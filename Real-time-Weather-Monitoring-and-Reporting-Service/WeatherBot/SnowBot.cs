@@ -2,7 +2,7 @@ using Real_time_Weather_Monitoring_and_Reporting_Service.WeatherPublisher;
 
 namespace Real_time_Weather_Monitoring_and_Reporting_Service.WeatherBot;
 
-public class SnowBot(double temperatureThreshold, string message) : IWeatherBot
+public sealed class SnowBot(double temperatureThreshold, string message) : IWeatherBot
 {
     private string _message = message;
 

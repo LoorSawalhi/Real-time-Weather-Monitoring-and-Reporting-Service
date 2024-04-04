@@ -1,11 +1,8 @@
-﻿using System.Xml.Serialization;
-using Real_time_Weather_Monitoring_and_Reporting_Service;
-using Real_time_Weather_Monitoring_and_Reporting_Service.AppConfiguration;
-using Real_time_Weather_Monitoring_and_Reporting_Service.Data;
+﻿using Real_time_Weather_Monitoring_and_Reporting_Service.AppConfiguration;
 using Real_time_Weather_Monitoring_and_Reporting_Service.WeatherPublisher;
 
-WeatherPublisher weatherPublisher = new WeatherPublisher();
-ConfigurationManager manager = new ConfigurationManager("/home/loor/Desktop/Foothill Training/C#/Real-time Weather Monitoring and Reporting Service/Real-time-Weather-Monitoring-and-Reporting-Service/Real-time-Weather-Monitoring-and-Reporting-Service/AppConfiguration/configurationDetails.json");
+var weatherPublisher = new WeatherPublisher();
+var manager = new ConfigurationManager("/home/loor/Desktop/Foothill Training/C#/Real-time Weather Monitoring and Reporting Service/Real-time-Weather-Monitoring-and-Reporting-Service/Real-time-Weather-Monitoring-and-Reporting-Service/AppConfiguration/configurationDetails.json");
 
 manager.AttachObservers(weatherPublisher);
 weatherPublisher.InteractWithUsers();

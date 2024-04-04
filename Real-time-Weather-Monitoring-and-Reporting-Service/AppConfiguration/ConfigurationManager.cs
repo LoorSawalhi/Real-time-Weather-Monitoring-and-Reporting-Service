@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-public class ConfigurationManager
+public sealed class ConfigurationManager
 {
     private Dictionary<string, JsonElement>? _config;
 
@@ -14,21 +14,6 @@ public class ConfigurationManager
     {
         string json = File.ReadAllText(configFilePath);
         _config = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-        // foreach (var observerConfig in _config)
-        // {
-        //     Console.WriteLine($"Observer: {observerConfig.Key}");
-        //     Console.WriteLine($"  Enabled: {observerConfig.Value.GetProperty("enabled")}");
-        //     if (observerConfig.Value.GetProperty("humidityThreshold").ValueKind != JsonValueKind.Undefined)
-        //     {
-        //         Console.WriteLine($"  Humidity Threshold: {observerConfig.Value.humidityThreshold}");
-        //     }
-        //     if (observerConfig.Value.GetProperty("temperatureThreshold").ValueKind != JsonValueKind.Undefined)
-        //     {
-        //         Console.WriteLine($"  Temperature Threshold: {observerConfig.Value.temperatureThreshold}");
-        //     }
-        //     Console.WriteLine($"  Message: {observerConfig.Value.message}");
-        //     Console.WriteLine();
-        // }
     }
 
     public void AttachObservers(WeatherPublisher.WeatherPublisher publisher)

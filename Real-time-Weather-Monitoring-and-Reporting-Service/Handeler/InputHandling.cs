@@ -1,6 +1,6 @@
 namespace Real_time_Weather_Monitoring_and_Reporting_Service.Handeler;
 
-public class InputHandling
+internal static class InputHandling
 {
     public static T? HandleUserInput<TException, T>(Func<T> optionAction) where TException : Exception
     {

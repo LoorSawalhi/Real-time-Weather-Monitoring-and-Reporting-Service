@@ -2,7 +2,7 @@ using Real_time_Weather_Monitoring_and_Reporting_Service.WeatherBot;
 
 namespace Real_time_Weather_Monitoring_and_Reporting_Service.WeatherPublisher;
 
-public class WeatherPublisher : IWeatherPublisher
+public sealed class WeatherPublisher : IWeatherPublisher
 {
     private List<IWeatherBot> _weatherBots = [];
 

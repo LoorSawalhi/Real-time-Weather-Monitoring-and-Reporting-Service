@@ -2,10 +2,10 @@ using Real_time_Weather_Monitoring_and_Reporting_Service.WeatherPublisher;
 
 namespace Real_time_Weather_Monitoring_and_Reporting_Service.WeatherBot;
 
-public class RainBot(double humidityThreshold, string message) : IWeatherBot
+public sealed class RainBot(double humidityThreshold, string message) : IWeatherBot
 {
     private double _humidityThreshold = humidityThreshold;
-    private string _message = message;
+    private string _message = message ?? String.Empty;
 
     public void Update(IWeatherPublisher publisher)
     {

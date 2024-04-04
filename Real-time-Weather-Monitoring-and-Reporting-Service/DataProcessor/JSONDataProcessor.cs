@@ -3,7 +3,7 @@ using Real_time_Weather_Monitoring_and_Reporting_Service.Data;
 
 namespace Real_time_Weather_Monitoring_and_Reporting_Service.DataProcessor;
 
-public class JsonDataProcessor : IDataProcessor
+public sealed class JsonDataProcessor : IDataProcessor
 {
     public WeatherData ReadData(string content)
     {
