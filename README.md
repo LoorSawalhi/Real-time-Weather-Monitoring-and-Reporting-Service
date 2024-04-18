@@ -1,4 +1,4 @@
-# Real-time Weather Monitoring Sysytem
+# Real-time Weather Monitoring System
 C# console application that simulates a real-time weather monitoring and reporting service. The system receives and processes raw weather data in multiple formats (JSON, XML, etc.) from various weather stations for different locations. 
 The application includes different types of 'weather bots' each of which is configured to behave differently based on the weather updates it receives.
 
