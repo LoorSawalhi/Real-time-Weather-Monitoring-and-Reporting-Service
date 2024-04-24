@@ -5,7 +5,7 @@ using Real_time_Weather_Monitoring_and_Reporting_Service.Handeler;
 
 namespace Real_time_Weather_Monitoring_and_Reporting_Service;
 
-internal class Utilities
+public class Utilities
 {
     private static int _inputLine;
     private const string InvalidOption = "Invalid Option !!! Try again.";
@@ -28,7 +28,7 @@ internal class Utilities
 
         var data = InputHandling.HandleUserInput<Exception, WeatherData>(() =>
         {
-            Console.WriteLine("Enter Your data :");
+            Console.Write("Enter Your data :");
             var dataToBeProcessed = ReadString();
             return dataProcessor.ReadData(dataToBeProcessed);
         });
@@ -39,32 +39,34 @@ internal class Utilities
      return data;
     }
 
-    private static IDataProcessor Options(int option)
+    public static IDataProcessor Options(int option)
     {
+        const int XmlOption = 1;
+        const int JsonOption = 2;
         IDataProcessor dataProcessor = option switch
         {
-            1 => new XmlDataProcessor(),
-            2 => new JsonDataProcessor(),
+            XmlOption => new XmlDataProcessor(),
+            JsonOption => new JsonDataProcessor(),
             _ => throw new NotValidUserInputException(InvalidOption)
         };
         return dataProcessor;
     }
 
-    private static int ReadOption()
+    public static int ReadOption()
     {
         var readLine = Console.ReadLine();
         Console.WriteLine();
-        if (readLine == null || !int.TryParse(readLine, out var option))
+        if (string.IsNullOrWhiteSpace(readLine) || !int.TryParse(readLine, out var option))
             throw new NotValidUserInputException(InvalidOption);
 
         return option;
     }
 
-    private static string ReadString()
+    public static string ReadString()
     {
-        var readLine = Console.ReadLine();
+        string readLine = Console.ReadLine();
         Console.WriteLine();
-        if (readLine == null)
+        if (string.IsNullOrWhiteSpace(readLine))
             throw new NotValidUserInputException("Empty Input!!");
 
         return readLine;
