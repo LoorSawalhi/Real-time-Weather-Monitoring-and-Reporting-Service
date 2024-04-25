@@ -31,3 +31,7 @@ All the bot's settings should be controlled via a configuration file, including 
 
 ## Code Structure
 The code structure is based on the Observer and the Strategy design patterns.
+
+
+## Status Badge
+[![build and test](https://github.com/LoorSawalhi/Real-time-Weather-Monitoring-and-Reporting-Service/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/LoorSawalhi/Real-time-Weather-Monitoring-and-Reporting-Service/actions/workflows/build_and_test.yml)
