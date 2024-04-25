@@ -1,3 +1,4 @@
+using Real_time_Weather_Monitoring_and_Reporting_Service.ConsoleReader;
 using Real_time_Weather_Monitoring_and_Reporting_Service.CustomExceptions;
 using Real_time_Weather_Monitoring_and_Reporting_Service.Data;
 using Real_time_Weather_Monitoring_and_Reporting_Service.DataProcessor;
@@ -10,10 +11,13 @@ public class Utilities
     private static int _inputLine;
     private const string InvalidOption = "Invalid Option !!! Try again.";
     private readonly InputHandling _inputHandling;
+    private readonly IConsoleReader _consoleReader;
 
-    public Utilities(InputHandling inputHandling)
+
+    public Utilities(InputHandling inputHandling, IConsoleReader consoleReader)
     {
         _inputHandling = inputHandling;
+        _consoleReader = consoleReader;
     }
 
     public virtual WeatherData Menu()
@@ -60,7 +64,7 @@ public class Utilities
 
     public virtual int ReadOption()
     {
-        var readLine = Console.ReadLine();
+        var readLine = _consoleReader.ReadLine();
         Console.WriteLine();
         if (string.IsNullOrWhiteSpace(readLine) || !int.TryParse(readLine, out var option))
             throw new NotValidUserInputException(InvalidOption);
@@ -70,7 +74,7 @@ public class Utilities
 
     public virtual string ReadString()
     {
-        string readLine = Console.ReadLine();
+        string readLine = _consoleReader.ReadLine();
         Console.WriteLine();
         if (string.IsNullOrWhiteSpace(readLine))
             throw new NotValidUserInputException("Empty Input!!");

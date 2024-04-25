@@ -11,4 +11,5 @@ public interface IWeatherPublisher
     void Attach(IWeatherBot weatherBot);
     void Detach(IWeatherBot weatherBot);
     void Notify();
+    public void InteractWithUsers();
 }
