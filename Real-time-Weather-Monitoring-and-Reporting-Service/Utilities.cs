@@ -9,10 +9,16 @@ public class Utilities
 {
     private static int _inputLine;
     private const string InvalidOption = "Invalid Option !!! Try again.";
+    private readonly InputHandling _inputHandling;
 
-    public static WeatherData Menu()
+    public Utilities(InputHandling inputHandling)
     {
-        var dataProcessor = InputHandling.HandleUserInput<Exception, IDataProcessor>(() =>
+        _inputHandling = inputHandling;
+    }
+
+    public virtual WeatherData Menu()
+    {
+        var dataProcessor = _inputHandling.HandleUserInput<NotValidUserInputException, IDataProcessor>(() =>
         {
             Console.Write("""
                           Welcome to the Weather Monitoring System
@@ -26,7 +32,7 @@ public class Utilities
             return Options(_inputLine);
         });
 
-        var data = InputHandling.HandleUserInput<Exception, WeatherData>(() =>
+        var data = _inputHandling.HandleUserInput<NotValidUserInputException, WeatherData>(() =>
         {
             Console.Write("Enter Your data :");
             var dataToBeProcessed = ReadString();
@@ -39,7 +45,7 @@ public class Utilities
      return data;
     }
 
-    public static IDataProcessor Options(int option)
+    public virtual IDataProcessor Options(int option)
     {
         const int XmlOption = 1;
         const int JsonOption = 2;
@@ -52,7 +58,7 @@ public class Utilities
         return dataProcessor;
     }
 
-    public static int ReadOption()
+    public virtual int ReadOption()
     {
         var readLine = Console.ReadLine();
         Console.WriteLine();
@@ -62,7 +68,7 @@ public class Utilities
         return option;
     }
 
-    public static string ReadString()
+    public virtual string ReadString()
     {
         string readLine = Console.ReadLine();
         Console.WriteLine();
