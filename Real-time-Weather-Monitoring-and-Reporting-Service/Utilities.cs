@@ -1,3 +1,4 @@
+using Real_time_Weather_Monitoring_and_Reporting_Service.ConsoleReader;
 using Real_time_Weather_Monitoring_and_Reporting_Service.CustomExceptions;
 using Real_time_Weather_Monitoring_and_Reporting_Service.Data;
 using Real_time_Weather_Monitoring_and_Reporting_Service.DataProcessor;
@@ -5,14 +6,23 @@ using Real_time_Weather_Monitoring_and_Reporting_Service.Handeler;
 
 namespace Real_time_Weather_Monitoring_and_Reporting_Service;
 
-internal class Utilities
+public class Utilities
 {
     private static int _inputLine;
     private const string InvalidOption = "Invalid Option !!! Try again.";
+    private readonly InputHandling _inputHandling;
+    private readonly IConsoleReader _consoleReader;
 
-    public static WeatherData Menu()
+
+    public Utilities(InputHandling inputHandling, IConsoleReader consoleReader)
     {
-        var dataProcessor = InputHandling.HandleUserInput<Exception, IDataProcessor>(() =>
+        _inputHandling = inputHandling;
+        _consoleReader = consoleReader;
+    }
+
+    public virtual WeatherData Menu()
+    {
+        var dataProcessor = _inputHandling.HandleUserInput<NotValidUserInputException, IDataProcessor>(() =>
         {
             Console.Write("""
                           Welcome to the Weather Monitoring System
@@ -26,9 +36,9 @@ internal class Utilities
             return Options(_inputLine);
         });
 
-        var data = InputHandling.HandleUserInput<Exception, WeatherData>(() =>
+        var data = _inputHandling.HandleUserInput<NotValidUserInputException, WeatherData>(() =>
         {
-            Console.WriteLine("Enter Your data :");
+            Console.Write("Enter Your data :");
             var dataToBeProcessed = ReadString();
             return dataProcessor.ReadData(dataToBeProcessed);
         });
@@ -39,32 +49,34 @@ internal class Utilities
      return data;
     }
 
-    private static IDataProcessor Options(int option)
+    public virtual IDataProcessor Options(int option)
     {
+        const int XmlOption = 1;
+        const int JsonOption = 2;
         IDataProcessor dataProcessor = option switch
         {
-            1 => new XmlDataProcessor(),
-            2 => new JsonDataProcessor(),
+            XmlOption => new XmlDataProcessor(),
+            JsonOption => new JsonDataProcessor(),
             _ => throw new NotValidUserInputException(InvalidOption)
         };
         return dataProcessor;
     }
 
-    private static int ReadOption()
+    public virtual int ReadOption()
     {
-        var readLine = Console.ReadLine();
+        var readLine = _consoleReader.ReadLine();
         Console.WriteLine();
-        if (readLine == null || !int.TryParse(readLine, out var option))
+        if (string.IsNullOrWhiteSpace(readLine) || !int.TryParse(readLine, out var option))
             throw new NotValidUserInputException(InvalidOption);
 
         return option;
     }
 
-    private static string ReadString()
+    public virtual string ReadString()
     {
-        var readLine = Console.ReadLine();
+        string readLine = _consoleReader.ReadLine();
         Console.WriteLine();
-        if (readLine == null)
+        if (string.IsNullOrWhiteSpace(readLine))
             throw new NotValidUserInputException("Empty Input!!");
 
         return readLine;

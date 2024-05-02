@@ -6,6 +6,15 @@ public sealed class WeatherPublisher : IWeatherPublisher
 {
     private List<IWeatherBot> _weatherBots = [];
 
+    public List<IWeatherBot> WeatherBots => _weatherBots;
+
+    private readonly Utilities _utilities;
+
+    public WeatherPublisher(Utilities utilities)
+    {
+        _utilities = utilities;
+    }
+
     public double HumidityThreshold { get; set; }
 
     public double TemperatureThreshold { get; set; }
@@ -32,12 +41,10 @@ public sealed class WeatherPublisher : IWeatherPublisher
 
     public void InteractWithUsers()
     {
-        var data = Utilities.Menu();
+        var data = _utilities.Menu();
 
         HumidityThreshold = data.Humidity;
         TemperatureThreshold = data.Temperature;
-
-        Thread.Sleep(15);
 
         Notify();
     }

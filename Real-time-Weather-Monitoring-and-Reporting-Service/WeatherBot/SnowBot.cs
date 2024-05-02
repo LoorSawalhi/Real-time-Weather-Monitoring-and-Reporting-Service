@@ -4,15 +4,16 @@ namespace Real_time_Weather_Monitoring_and_Reporting_Service.WeatherBot;
 
 public sealed class SnowBot(double temperatureThreshold, string message) : IWeatherBot
 {
-    private string _message = message;
+    public double TemperatureThreshold { get; set; } = temperatureThreshold;
+    public string Message { get; set; } = message;
 
     public void Update(IWeatherPublisher publisher)
     {
-        if ((publisher as WeatherPublisher.WeatherPublisher)!.TemperatureThreshold < temperatureThreshold)
+        if (publisher.TemperatureThreshold < TemperatureThreshold)
         {
             Console.WriteLine($"""
                                Snow Bot Activated!!
-                               {message}
+                               {Message}
                                """);
         }
     }
